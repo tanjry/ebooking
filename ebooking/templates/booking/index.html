@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container-login100">
+		<span class="login100-form-title">
+        <h1>Welcome to E-Booking</h1>
+        <br/><br/>
+        <form class="form-inline" method="GET" action="{% url 'index' %}">
+            <div class="form-group"> 
+                <label for="search">ค้นหาชื่อห้อง</label>
+                <input type="text" class="input100 form-control ml-3" id="search" 
+                    name="search" placeholder="Search" value="{{search}}">
+    
+
+                <label for="search">ค้นหาวันว่าง</label>
+                <input type="time" class="input100 form-control ml-3" id="search" 
+                    name="search" placeholder="Search" value="{{search}}">
+                    
+    
+
+                <label for="search">ค้นหาเวลาว่าง</label>
+                <input type="time" class="input100 form-control ml-3" id="search" 
+                    name="search" placeholder="Search" value="{{search}}">
+                    
+                
+            </div>
+        </form>
+        <br/><br/>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ชื่อห้อง</th>
+                    <th scope="col">ความจุ</th>
+                    <th scope="col">เวลาเปิด</th>
+                    <th scope="col">วเวลาปิด</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for room in room_list %}
+                <tr>
+                    <td>{{ room.name }}</td>
+                    <td>{{ room.open_time }}</td>
+                    <td>{{ room.close_time }}</td>
+                    <td>{{ room.capacity }}</td>
+                    <td>
+                        {% if user.is_authenticated %}<a href="{% url 'room_detail' room_id=room.id %}">
+                            <div class="btn btn-warning">View detail</div>
+                        </a>{% engif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    Footer of index page!!!
+{% endblock %}
